@@ -1,5 +1,5 @@
 function editNav() {
-	var x = document.getElementById('myTopnav')
+	let x = document.getElementById('myTopnav')
 	if (x.className === 'topnav') {
 		x.className += ' responsive'
 	} else {
@@ -18,6 +18,7 @@ const inputs = {}
 const errors = {}
 document.querySelectorAll('form .formData input').forEach((input) => (inputs[input.id] = input))
 
+// Create error DOM Elements
 formData.forEach((form) => {
 	const errorElement = document.createElement('p')
 	const input = Object.values(form.children).find((el) => el.name)
@@ -28,15 +29,15 @@ formData.forEach((form) => {
 	form.append(errorElement)
 })
 
-// launch modal event
+// Launch modal event
 modalBtn.forEach((btn) => btn.addEventListener('click', launchModal))
 
-// launch modal form
+// Launch modal function
 function launchModal() {
 	modalbg.style.display = 'block'
 }
 
-// close modal form
+// Close modal form
 close.addEventListener('click', closeModal)
 
 function closeModal() {
@@ -44,11 +45,12 @@ function closeModal() {
 	modalBody.innerHTML = formContent
 }
 
-// On crée une regex pour la vérification du nom
+// Regex for name validation
 const nameRegex = /^[A-zÀ-ú' -]*$/
-// On crée une regex pour la vérification de l'email
+// Regex for mail validation
 const regexMail = /^[A-z0-9-.]{1,}[@][A-z-]{2,}[.][A-z]{2,}$/g
 
+// Function to validate inputs
 const validate = (event) => {
 	event.preventDefault()
 	let error = false
@@ -115,7 +117,7 @@ const validate = (event) => {
 
 	if (error) return
 
-	// on fait disparaitre le formulaire et on affiche un message de confirmation
+	// Clear form and display confirmation message
 	modalBody.innerHTML = ''
 	const conf = document.createElement('p')
 	conf.textContent = 'Merci pour votre réservation !'
