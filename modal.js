@@ -11,9 +11,9 @@ function editNav() {
 const modalbg = document.querySelector('.bground')
 const modalBtn = document.querySelectorAll('.modal-btn')
 const modalBody = document.querySelector('.modal-body')
-const formContent = modalBody.innerHTML
 const close = document.querySelector('.close')
-const formData = document.querySelectorAll('.formData')
+const formContent = modalBody.innerHTML
+let formData = document.querySelectorAll('.formData')
 const inputs = {}
 const errors = {}
 document.querySelectorAll('form .formData input').forEach((input) => (inputs[input.id] = input))
@@ -43,6 +43,17 @@ close.addEventListener('click', closeModal)
 function closeModal() {
 	modalbg.style.display = 'none'
 	modalBody.innerHTML = formContent
+	formData = document.querySelectorAll('.formData')
+	formData.forEach((form) => {
+		const errorElement = document.createElement('p')
+		const input = Object.values(form.children).find((el) => el.name)
+		errors[input.name] = errorElement
+		errorElement.classList.add(input.name + '-error')
+		errorElement.style.color = 'red'
+		errorElement.style.fontSize = '1rem'
+		form.append(errorElement)
+	})
+	document.querySelectorAll('form .formData input').forEach((input) => (inputs[input.id] = input))
 }
 
 // Regex for name validation
